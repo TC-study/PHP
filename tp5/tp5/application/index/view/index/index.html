@@ -1,0 +1,5 @@
+{{extend name="public/base"}}
+{{block name="content"}}
+<h1>注意不要在head标签内添加双括号的解析内容，会影响结果</h1>
+<h1>{{$Think.session.user.username}}</h1>
+{{/block}}

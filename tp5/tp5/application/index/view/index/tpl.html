@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>验证think模板引擎</title>
+</head>
+
+<body>
+    <h3>这是验证模块引擎的效果页面</h3>
+    {{// 这里是注释，你看不见我的}}
+    {{/* 注意：注释时左侧写标签（//）是要紧靠标签(定界符)
+    我是多行注释
+    */}}
+    {{// 标量的展示}}
+    {{$hi}}
+    {{//数组的展示}}
+    {{//数组不能用echo输出,所以不能直接$user}}
+    <div>{{//$user 这样是错误的}}</div>
+    <div>{{$user.username}}</div>
+    <div>{{$user['username']}}</div>
+    <div>{{$user['created_at']|date='Y/m/d',###}}</div>
+    {{//对象的展示}}
+    <div>{{$obj->created_at}}</div>
+    <div>{{$obj:updated_at}}</div>
+    {{//变量调节器}}
+    {{//时间日期date}}
+    {{// 对于date来说，###可以说是占位符(5.0有且必须写，5.1没了)}}
+    <div>{{$obj->created_at|date='Y/m/d',###}}</div>
+    <div>{{$obj:updated_at|date='Y/m/d',###}}</div>
+    {{// 大小写转换}}
+    <div>{{$hi|strtolower}}</div>
+    <div>{{$hi|strtoupper}}</div>
+    <div>{{$hi|ucfirst}}</div>
+    {{//字符串截取}}
+    {{//注意编码问题}}
+    {{//substr一般截取的是英文 0表示开头 -1表示尾第一个字符 start是必须 }}
+    {{//mb_substr截取的是中文 0表示开头第一个字 -1表示尾第一个字 start是必须}}
+    <div>{{$user.nick_name}}</div>
+    <div>{{$user.nick_name|substr=0,6}}</div>
+    <div>{{$user.nick_name|mb_substr=2}}</div>
+    {{//声明：Think模板引擎支持"管道"的写法}}
+    {{//管道:上一个命令的输出是下一个命令的输入}}
+    <div>{{$hi|strtolower|substr=0,5}}</div>
+    {{//保留变量：不需要assign绑定变量，可以直接访问}}
+    {{//注意是$Think 首字母要大写，可以访问常量和预定义变量和访问配置}}
+    <div>{{$Think.APP_PATH}}</div>
+    <div>{{$Think.get.test}}</div>
+    <div>{{$Think.post.demo}}</div>
+    <div>{{//$Think.session}}</div>
+    <div>{{$Think.config.default_controller}}</div>
+    <div>{{$Think.config.url_html_suffix}}</div>
+    <div>{{$Think.config.paginate.list_rows}}</div>
+    {{//$Request保留变量：可以获取当前模块名和控制器名和方法名}}
+    <div>{{$Request.module}}</div>
+    <div>{{$Request.controller}}</div>
+    <div>{{$Request.action}}</div>
+    {{//三目运算符 $变量? 真:假}}
+    {{$Think.config.app_debug ? '调试模式已开启':'调试模式已关闭'}}
+    {{//文件加载(think.php/libary/view.php) static引入外部css,js框架}}
+    {{//字符替换}}
+    {{//__STATIC__ 对应目录: public/static}}
+    {{//__CSS__ 对应目录: public/static/css}}
+    {{//__JS__ 对应目录: public/static/js}}
+    {{//load加载}}
+    {{//load file="文件路径" 可以加载css js 图片}}
+    {{//流程控制语句}}
+    {{//if语句}}
+    <div>
+        {{if condition="$Think.config.app_trace"}}
+        已开始追踪窗口
+        {{else /}}
+        未开启追踪窗口
+        {{/if}}
+    </div>
+    {{//volist语句}}
+    {{//在模板中调用php函数}}
+    {{:函数名(参数)}}
+</body>
+
+</html>

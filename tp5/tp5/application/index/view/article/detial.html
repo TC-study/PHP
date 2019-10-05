@@ -1,0 +1,54 @@
+{{extend name="public/base"}}
+{{block name="content"}}
+<div class="col-md-8">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {{$list.subject}}
+            </h3>
+        </div>
+        <div class="panel-body">
+            {{$list.content}}
+        </div>
+        <div class="panel-footer">
+            创建时间: {{$list.created_at}}
+            <span class="glyphicon glyphicon-eye-open"></span>({{$list.browse_times}})
+            <span class="glyphicon glyphicon-comment"></span>({{$list.comment_number}})
+        </div>
+    </div>
+</div>
+{{/block}}
+{{block name="right"}}
+<div class="col-md-4">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">最热排行榜</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                {{volist name="hotest" id="vo"}}
+                <li class="list-group-item">
+                    <a href="#">{{$vo.subject}}</a>
+                    <span class="badge">{{$vo.browse_times}}</span>
+                </li>
+                {{/volist}}
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">最新排行榜</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                {{volist name="newest" id="vo"}}
+                <li class="list-group-item">
+                    <a href="#">{{$vo.subject}}</a>
+                </li>
+                {{/volist}}
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+{{/block}}

@@ -1,0 +1,34 @@
+{{extend name="public/base"}}
+{{block name="content"}}
+<div class="col-md-8">
+    <h2>用户登录</h2>
+    <form action="{{:url('index/user/doLogin')}}" method="post">
+        <div class="form-group">
+            <label class="control-label">用户名</label>
+            <input type="text" name="username" value="" class="form-control">
+            <span class="help-block">用户名必须填写</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">密码</label>
+            <input type="password" name="password" value="" class="form-control">
+            <span class="help-block">密码必须填写</span>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember" value="1"> 7天免密登录
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="登录" class="btn btn-primary">
+            <input type="reset" value="取消" class="btn btn-default">
+        </div>
+    </form>
+</div>
+{{/block}}
+{{block name="right"}}
+<div class="col-md-4">
+    <h2>右边栏</h2>
+</div>
+{{/block}}

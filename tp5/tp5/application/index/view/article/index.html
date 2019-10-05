@@ -1,0 +1,57 @@
+{{extend name="public/base"}}
+{{block name="content"}}
+<div class="col-md-8">
+    {{volist name="list" id="vo"}}
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <a href="{{:url('index/Article/detial',['id'=>$vo.id])}}">
+                <h3 class="panel-title">
+                    {{$vo.subject}}
+                </h3>
+            </a>
+        </div>
+        <div class="panel-body">
+            {{$vo.content|subtext=50}}
+        </div>
+        <div class="panel-footer">
+            创建时间: {{$vo.created_at}} 浏览量: ({{$vo.browse_times}}) 评论数量: ({{$vo.comment_number}})
+        </div>
+    </div>
+    {{/volist}}
+    {{$list->render()}}
+</div>
+{{/block}}
+{{block name="right"}}
+<div class="col-md-4">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">最热排行榜</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                {{volist name="hotest" id="vo"}}
+                <li class="list-group-item">
+                    <a href="#">{{$vo.subject}}</a>
+                    <span class="badge">{{$vo.browse_times}}</span>
+                </li>
+                {{/volist}}
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">最新排行榜</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                {{volist name="newest" id="vo"}}
+                <li class="list-group-item">
+                    <a href="#">{{$vo.subject}}</a>
+                </li>
+                {{/volist}}
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+{{/block}}

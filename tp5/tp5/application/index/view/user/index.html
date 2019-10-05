@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    {{load file="__STATIC__/bootstrap/css/bootstrap.css"}}
+</head>
+
+<body>
+    <h1>用户列表</h1>
+    <table class="table table-bordered table-striped table-condensed table-hover">
+        <thead>
+            <tr>
+                <td>用户名</td>
+                <td>用户密码</td>
+                <td>用户昵称</td>
+                <td>用户头像路径</td>
+                <td>用户注册时间</td>
+                <td>用户更新时间</td>
+                <td>操作菜单</td>
+            </tr>
+        </thead>
+        <tbody>
+            {{volist name="list" id="vo"}}
+            <tr {{if condition="$key == 0"}} style="color: red;" {{/if}}>
+                <td>{{$vo.username}}</td>
+                <td>{{$vo.password}}</td>
+                <td>{{$vo.nick_name}}</td>
+                <td>{{$vo.user_photo}}</td>
+                <td>{{$vo.created_at|date="Y-m-d H:i:s",###}}</td>
+                <td>{{$vo.updated_at|date="Y-m-d H:i:s",###}}</td>
+                <td>
+                    <a href="#" class="btn btn-success">查看</a>
+                    <a href="#" class="btn btn-primary">编辑</a>
+                    <a href="#" class="btn btn-danger">删除</a>
+                </td>
+            </tr>
+            {{/volist}}
+        </tbody>
+    </table>
+    {{load file="__JS__/jquery-3.3.1.js"}}
+    {{load file="__STATIC__/bootstrap/js/bootstrap.js"}}
+</body>
+
+</html>
